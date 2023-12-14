@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Capstone - Robert Klare</string>
+    <string name="coaching_companion">Coaching Companion:</string>
+    <string name="youth_roster_manager">Youth Roster Manager</string>
+    <string name="pick_ups">Pick-Ups</string>
+    <string name="search">Search</string>
+    <string name="select_a_team">Select a Team:</string>
+    <string name="add_a_new_team">Add a New Team!</string>
 </resources>
