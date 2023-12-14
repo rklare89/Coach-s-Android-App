@@ -2,6 +2,9 @@ package android.reserver.capstone_robertklare.Entities;
 
 import android.reserver.capstone_robertklare.Enum.Role;
 
+import androidx.room.Entity;
+
+@Entity(tableName = "Parents")
 public class Parent extends Person {
 
     String phone;

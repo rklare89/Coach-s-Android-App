@@ -1,7 +1,10 @@
 package android.reserver.capstone_robertklare.Entities;
 
+import androidx.room.Entity;
+
 import java.util.Date;
 
+@Entity(tableName = "People")
 public class Player extends Person {
 
     String position;
