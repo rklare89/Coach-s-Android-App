@@ -2,12 +2,16 @@ package android.reserver.capstone_robertklare.DAO;
 
 import android.reserver.capstone_robertklare.Entities.Parent;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Index;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 import androidx.room.Update;
+
+import java.util.List;
 
 @Dao
 public interface ParentDAO {
@@ -20,4 +24,10 @@ public interface ParentDAO {
 
     @Delete
     void delete(Parent parent);
+
+    @Query("SELECT * FROM Parents")
+    LiveData<List<Parent>> getAllParents();
+
+    @Query("SELECT * FROM Parents Where personID = :id")
+    LiveData<Parent> getParentById(int id);
 }

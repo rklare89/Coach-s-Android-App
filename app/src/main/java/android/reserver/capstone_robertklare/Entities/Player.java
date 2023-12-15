@@ -1,21 +1,23 @@
 package android.reserver.capstone_robertklare.Entities;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 
 import java.util.Date;
 
-@Entity(tableName = "People")
+@Entity(tableName = "Players")
 public class Player extends Person {
 
     String position;
     int number;
-    Date dob;
+    String dob;
     int parentID;
     boolean isRostered;
 
 
+
     public Player(String firstName, String lastname, int teamID, String position, int number,
-                  Date dob, int parentID, boolean isRostered) {
+                  String dob, int parentID, boolean isRostered) {
         super(firstName, lastname, teamID);
 
         this.position = position;
@@ -41,11 +43,11 @@ public class Player extends Person {
         this.number = number;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

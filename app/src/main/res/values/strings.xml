@@ -6,4 +6,7 @@
     <string name="search">Search</string>
     <string name="select_a_team">Select a Team:</string>
     <string name="add_a_new_team">Add a New Team!</string>
+    <string name="add_your_new_team">Add Your New Team:</string>
+    <string name="back_to_home">Back To Home</string>
+    <string name="save_team_info">Save Team Info</string>
 </resources>
