@@ -9,4 +9,16 @@
     <string name="add_your_new_team">Add Your New Team:</string>
     <string name="back_to_home">Back To Home</string>
     <string name="save_team_info">Save Team Info</string>
+    <string name="team_name">Team Name:</string>
+    <string name="age_group">Age Group:</string>
+    <string name="enter_your_new_team_name">Enter New Team Name</string>
+    <string-array name="Ages">
+        <item>8U</item>
+        <item>10U</item>
+        <item>12U</item>
+        <item>14U</item>
+        <item>16U</item>
+        <item>18U</item>
+    </string-array>
+
 </resources>

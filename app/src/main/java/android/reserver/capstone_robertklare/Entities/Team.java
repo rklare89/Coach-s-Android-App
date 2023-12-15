@@ -21,4 +21,27 @@ public class Team {
         this.teamName = teamName;
         this.ageGroup = ageGroup;
     }
+
+    public Team() {};
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public String getAgeGroup() {
+        return ageGroup;
+    }
+
+    public void setAgeGroup(String ageGroup) {
+        this.ageGroup = ageGroup;
+    }
+
+    public Set<Player> getPlayerSet() {
+        return playerSet;
+    }
+
 }

@@ -20,12 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
         Repository repo = new Repository(getApplication());
 
-        Team testTeam = new Team("Triple Threat", "12U");
-        repo.insertTeam(testTeam);
-
-
-
-
         addTeamBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
