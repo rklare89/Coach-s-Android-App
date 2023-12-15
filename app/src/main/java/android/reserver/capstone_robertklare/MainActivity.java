@@ -1,6 +1,9 @@
 package android.reserver.capstone_robertklare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +12,12 @@ import android.reserver.capstone_robertklare.Entities.Team;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements TeamListAdapter.OnItemClickListener {
+
+    private TeamListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +31,36 @@ public class MainActivity extends AppCompatActivity {
         addTeamBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this, AddTeam.class);
                 startActivity(intent);
-
-
             }
         });
 
+        RecyclerView recyclerView = findViewById(R.id.teamList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
+        adapter = new TeamListAdapter(new ArrayList<>(), this);
+        recyclerView.setAdapter(adapter);
+
+        // Observe changes in LiveData and update the adapter
+        repo.getAllTeams().observe(this, teams -> {
+            // Update the adapter with the new data
+            adapter.setTeams(teams);
+        });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Team selectedTeam = adapter.getTeams().get(position);
+        String teamName = selectedTeam.getTeamName();
+        int teamId = selectedTeam.getTeamId();
+        String ageGroup = selectedTeam.getAgeGroup();
+
+        Intent intent = new Intent(MainActivity.this, TeamDetails.class);
+        intent.putExtra("team", teamName);
+        intent.putExtra("age", ageGroup);
+        intent.putExtra("id", teamId);
+        startActivity(intent);
     }
 }

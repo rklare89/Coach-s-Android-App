@@ -40,6 +40,10 @@ public class Team {
         this.ageGroup = ageGroup;
     }
 
+    public int getTeamId() {
+        return teamId;
+    }
+
     public Set<Player> getPlayerSet() {
         return playerSet;
     }

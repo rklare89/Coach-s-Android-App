@@ -13,14 +13,17 @@
         android:theme="@style/Theme.CapstoneRobertKlare"
         tools:targetApi="31">
         <activity
+            android:name=".TeamDetails"
+            android:exported="false" />
+        <activity
             android:name=".AddTeam"
             android:exported="false"
             android:label="Add Team"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="Welcome Coach!"
-            android:exported="true">
+            android:exported="true"
+            android:label="Welcome Coach!">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

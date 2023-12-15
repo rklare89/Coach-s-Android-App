@@ -12,6 +12,8 @@
     <string name="team_name">Team Name:</string>
     <string name="age_group">Age Group:</string>
     <string name="enter_your_new_team_name">Enter New Team Name</string>
+    <string name="or">OR:</string>
+    <string name="delete_team">DELETE TEAM</string>
     <string-array name="Ages">
         <item>8U</item>
         <item>10U</item>
