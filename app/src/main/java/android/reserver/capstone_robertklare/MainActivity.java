@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
+import android.reserver.capstone_robertklare.Entities.Player;
 import android.reserver.capstone_robertklare.Entities.Team;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements TeamListAdapter.O
         Button addTeamBtn = findViewById(R.id.addTeamBtn);
 
         Repository repo = new Repository(getApplication());
+
+        Player testPlayer = new Player("Rusty", "Nail", 1, "P/OF", 20, "12/14/1989", 1, true);
+        repo.insertPlayer(testPlayer);
 
         addTeamBtn.setOnClickListener(new View.OnClickListener() {
             @Override

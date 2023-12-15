@@ -26,9 +26,6 @@ public class TeamListAdapter extends RecyclerView.Adapter<MyViewHolder>{
     this.onItemClickListener = listener;
     }
 
-    public TeamListAdapter(List<Team> teamList) {
-        this.teamList = teamList;
-    }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

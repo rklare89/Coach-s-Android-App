@@ -67,6 +67,10 @@ public class Repository {
         return mPlayerDAO.getPlayerById(playerId);
     }
 
+    public LiveData<List<Player>> getPlayersByTeamID(int id) {
+        return mPlayerDAO.getPlayersByTeamID(id);
+    }
+
     public void insertPlayer(Player player) {
         databaseBuilder.databaseWriteExecutor.execute(() -> {
             mPlayerDAO.insert(player);
@@ -84,6 +88,8 @@ public class Repository {
             mPlayerDAO.delete(player);
         });
     }
+
+
 
     // Parent operations
     public LiveData<List<Parent>> getAllParents() {
