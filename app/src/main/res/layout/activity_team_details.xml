@@ -20,14 +20,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/deleteTeamButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="36dp"
         android:backgroundTint="@color/deleteRed"
         android:text="@string/delete_team"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addPlayerButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -43,14 +44,27 @@
         app:layout_constraintTop_toBottomOf="@+id/detailsTeamName" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="246dp"
-        android:layout_height="332dp"
-        android:layout_marginTop="60dp"
         android:id="@+id/playerList"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_width="314dp"
+        android:layout_height="362dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/deleteTeamButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/addPlayerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="@string/add_player"
+        android:backgroundTint="@color/addGreen"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/deleteTeamButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

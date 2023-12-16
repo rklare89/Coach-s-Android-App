@@ -40,6 +40,8 @@ public class Repository {
         return mTeamDAO.getTeamById(teamId);
     }
 
+    public Team getPlayerTeamByID(int teamId) { return mTeamDAO.getPlayerTeam(teamId);}
+
     public void insertTeam(Team team) {
         databaseBuilder.databaseWriteExecutor.execute(() -> {
             mTeamDAO.insert(team);
@@ -55,6 +57,12 @@ public class Repository {
     public void deleteTeam(Team team) {
         databaseBuilder.databaseWriteExecutor.execute(() -> {
             mTeamDAO.delete(team);
+        });
+    }
+
+    public void deleteTeamById(int id) {
+        databaseBuilder.databaseWriteExecutor.execute(() -> {
+            mTeamDAO.deleteByTeamId(id);
         });
     }
 
@@ -99,6 +107,9 @@ public class Repository {
     public LiveData<Parent> getParentById(int parentId) {
         return mParentDAO.getParentById(parentId);
     }
+    public int getParentByNames(String firstName, String LastName) {
+        return mParentDAO.getParentByNames(firstName, LastName);
+    }
 
     public void insertParent(Parent parent) {
         databaseBuilder.databaseWriteExecutor.execute(() -> {
@@ -111,11 +122,12 @@ public class Repository {
             mParentDAO.update(parent);
         });
     }
-
     public void deleteParent(Parent parent) {
         databaseBuilder.databaseWriteExecutor.execute(() -> {
             mParentDAO.delete(parent);
         });
+
+
 
 
 }}

@@ -1,14 +1,17 @@
 package android.reserver.capstone_robertklare.Entities;
 
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(tableName = "Teams")
-public class Team {
+public class Team implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     public int teamId;

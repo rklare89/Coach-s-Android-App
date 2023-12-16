@@ -13,8 +13,18 @@
         android:theme="@style/Theme.CapstoneRobertKlare"
         tools:targetApi="31">
         <activity
-            android:name=".TeamDetails"
+            android:name=".PlayerDetails"
+            android:exported="false"
+            android:label="Player Details"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".AddPlayer"
             android:exported="false" />
+        <activity
+            android:name=".TeamDetails"
+            android:exported="false"
+            android:label="Team Details"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".AddTeam"
             android:exported="false"

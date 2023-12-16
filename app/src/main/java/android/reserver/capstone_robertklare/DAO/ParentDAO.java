@@ -30,4 +30,7 @@ public interface ParentDAO {
 
     @Query("SELECT * FROM Parents Where personID = :id")
     LiveData<Parent> getParentById(int id);
+
+    @Query("SELECT personID FROM Parents WHERE (firstName = :firstName AND lastname = :lastName);")
+    int getParentByNames(String firstName, String lastName);
 }

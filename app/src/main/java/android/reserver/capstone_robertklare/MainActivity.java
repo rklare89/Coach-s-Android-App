@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements TeamListAdapter.O
 
         Repository repo = new Repository(getApplication());
 
-        Player testPlayer = new Player("Rusty", "Nail", 1, "P/OF", 20, "12/14/1989", 1, true);
-        repo.insertPlayer(testPlayer);
+        //Player testPlayer = new Player("Pump", "YouUP", 2, "P/OF", 20, "12/14/1989", 1, true);
+        //repo.insertPlayer(testPlayer);
 
         addTeamBtn.setOnClickListener(new View.OnClickListener() {
             @Override

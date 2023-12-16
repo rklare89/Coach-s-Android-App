@@ -24,9 +24,15 @@ public interface TeamDAO {
     @Delete
     void delete(Team team);
 
+    @Query("DELETE FROM Teams WHERE teamId = :id;")
+    void deleteByTeamId(int id);
+
     @Query("SELECT * FROM teams")
     LiveData<List<Team>> getAllTeams();
 
     @Query("SELECT * FROM Teams WHERE teamId = :teamId")
     List<Team> getTeamById(int teamId);
+
+    @Query("SELECT * from Teams where teamId = :teamId;")
+    Team getPlayerTeam(int teamId);
 }
