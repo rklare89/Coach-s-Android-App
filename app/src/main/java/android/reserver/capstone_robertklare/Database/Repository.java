@@ -32,6 +32,8 @@ public class Repository {
 
     }
 
+
+
     // Team operations
     public LiveData<List<Team>> getAllTeams() {
         return mTeamDAO.getAllTeams();
@@ -110,6 +112,13 @@ public class Repository {
     }
     public LiveData<Parent> getParentByNames(String firstName, String LastName) {
         return mParentDAO.getParentByNames(firstName, LastName);
+    }
+
+    public String getParentFirstName(long id) {
+        return mParentDAO.getParentFirstName(id);
+    }
+    public String getParentLastName(long id) {
+        return mParentDAO.getParentLastName(id);
     }
 
     public long insertParent(Parent parent) {

@@ -45,6 +45,7 @@
     <string name="_800_555_5555">8005555555</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add!</string>
+    <string name="parentname">ParentName</string>
     <string-array name="Ages">
         <item>8U</item>
         <item>10U</item>
