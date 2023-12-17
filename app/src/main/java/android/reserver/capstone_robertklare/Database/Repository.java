@@ -1,6 +1,7 @@
 package android.reserver.capstone_robertklare.Database;
 
 import android.app.Application;
+import android.os.AsyncTask;
 import android.reserver.capstone_robertklare.DAO.ParentDAO;
 import android.reserver.capstone_robertklare.DAO.PlayerDAO;
 import android.reserver.capstone_robertklare.DAO.TeamDAO;
@@ -72,6 +73,16 @@ public class Repository {
     // Player operations
     public LiveData<List<Player>> getAllPlayers() {
         return mPlayerDAO.getAllPlayers();
+    }
+
+    public void removePlayersFromTeam(int teamID) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mPlayerDAO.removePlayersFromDeletedTeam(teamID);
+                return null;
+            }
+        }.execute();
     }
 
     public LiveData<Player> getPlayerById(int playerId) {

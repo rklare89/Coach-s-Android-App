@@ -36,4 +36,7 @@ public interface PlayerDAO {
 
     @Query("SELECT * FROM Players where isRostered = 0;")
     LiveData<List<Player>> getPlayersNotRostered();
+
+    @Query("UPDATE Players SET isRostered = 0 WHERE teamID = :teamid")
+    void removePlayersFromDeletedTeam(int teamid);
 }

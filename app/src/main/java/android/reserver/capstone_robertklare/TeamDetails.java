@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.AsyncQueryHandler;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Player;
@@ -66,7 +68,17 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            repo.deleteTeamById(teamID);
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+
+                        repo.removePlayersFromTeam(teamID);
+                        repo.deleteTeamById(teamID);
+                        return null;
+                    }
+                }.execute();
+
             finish();
             }
         });
