@@ -18,13 +18,13 @@ public class PlayerDetails extends AppCompatActivity {
 
 
     Team team;
+    Repository repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_details);
-
-        Repository repo = new Repository(getApplication());
+        repo = new Repository(getApplication());
 
         Button donebtn = findViewById(R.id.Done);
         donebtn.setOnClickListener(new View.OnClickListener() {
@@ -34,8 +34,10 @@ public class PlayerDetails extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
+        //TODO: Create Edit Button
+        //TODO: Create Delete Button
 
+        Intent intent = getIntent();
         String firstName = intent.getStringExtra("firstName");
         String lastName = intent.getStringExtra("lastName");
         String fullName = firstName + " " + lastName;
@@ -47,7 +49,6 @@ public class PlayerDetails extends AppCompatActivity {
         Log.d("parID Value", "parID Value: " + parID);
         boolean isRostered = intent.getBooleanExtra("roster", false);
         TextView onTeam = findViewById(R.id.onTeam);
-
 
         new AsyncTask<Integer, Void, Team>() {
             @Override
@@ -84,13 +85,8 @@ public class PlayerDetails extends AppCompatActivity {
                 Intent parentIntent = new Intent(PlayerDetails.this, ParentDetails.class);
                 parentIntent.putExtra("parentID", parID);
                 startActivity(parentIntent);
-
             }
         });
-
-
-
-
     }
 
     private void updateUIWithTeamInfo(boolean isRostered, TextView onTeam) {
@@ -111,6 +107,5 @@ public class PlayerDetails extends AppCompatActivity {
             String message = "Pickup Player";
             onTeam.setText(message);
         }
-
     }
 }

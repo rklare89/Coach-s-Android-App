@@ -1,5 +1,6 @@
 package android.reserver.capstone_robertklare;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,19 +21,30 @@ import java.util.ArrayList;
 public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.OnItemClickListener{
 
     private PlayerListAdapter adapter;
-    Repository repo = new Repository(getApplication());
+    Repository repo;
+    private int teamID;
+    private static final String TEAM_ID_KEY = "team_id_key";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_details);
 
+        repo = new Repository(getApplication());
 
-        //Sets up headers on page
+        // Sets up headers on page
         Intent intent = getIntent();
         String teamName = intent.getStringExtra("team");
         String teamAge = intent.getStringExtra("age");
-        int teamID = intent.getIntExtra("id", 0);
+
+        if (savedInstanceState != null) {
+            teamID = savedInstanceState.getInt(TEAM_ID_KEY, 0);
+        } else {
+
+            teamID = intent.getIntExtra("id", 0);
+        }
+
 
         TextView teamNameBox = findViewById(R.id.detailsTeamName);
         TextView teamAgeBox = findViewById(R.id.textView9);
@@ -100,6 +112,25 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         startActivity(intent);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ResumeCalled", "onResume: Method Called");
+
+
+
+        // Refresh data when returning to the activity
+        repo.getPlayersByTeamID(teamID).observe(this, player -> {
+            Log.d("listSize", "onResume: " + player.size());
+            Log.d("TeamID", "TeamID = " + teamID);
+            adapter.setPlayers(player);
+            adapter.notifyDataSetChanged(); // Notify adapter about the data change
+        });
+
+
+    }
+
 
 
 }

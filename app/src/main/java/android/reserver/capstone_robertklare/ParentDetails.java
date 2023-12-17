@@ -34,6 +34,8 @@ public class ParentDetails extends AppCompatActivity {
         phone = findViewById(R.id.phoneContent);
         email = findViewById(R.id.eMailContent);
 
+
+
         Intent intent = getIntent();
         long parentID = intent.getLongExtra("parentID", 0);
 
@@ -50,8 +52,7 @@ public class ParentDetails extends AppCompatActivity {
             }
         });
 
-
-        Log.d("Name", "onCreate: " + name);
+        //TODO:  Add Done Button
 
     }
 

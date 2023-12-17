@@ -82,6 +82,10 @@ public class Repository {
         return mPlayerDAO.getPlayersByTeamID(id);
     }
 
+    public LiveData<List<Player>> getPlayersNotRostered() {
+        return mPlayerDAO.getPlayersNotRostered();
+    }
+
     public void insertPlayer(Player player) {
         databaseBuilder.databaseWriteExecutor.execute(() -> {
             mPlayerDAO.insert(player);

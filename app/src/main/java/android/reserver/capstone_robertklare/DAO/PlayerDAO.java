@@ -30,9 +30,10 @@ public interface PlayerDAO {
     @Query("SELECT * FROM Players where personID = :id;")
     LiveData<Player> getPlayerById(int id);
 
-    @Query("SELECT * FROM Players where teamID = :teamID")
+    @Query("SELECT * FROM Players where (teamID = :teamID AND isRostered = 1)")
     LiveData<List<Player>> getPlayersByTeamID(int teamID);
 
 
-
+    @Query("SELECT * FROM Players where isRostered = 0;")
+    LiveData<List<Player>> getPlayersNotRostered();
 }
