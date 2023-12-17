@@ -35,7 +35,6 @@ public class PlayerDetails extends AppCompatActivity {
         });
 
         //TODO: Create Edit Button
-        //TODO: Create Delete Button
 
         Intent intent = getIntent();
         String firstName = intent.getStringExtra("firstName");
@@ -46,6 +45,7 @@ public class PlayerDetails extends AppCompatActivity {
         int num = intent.getIntExtra("number", 0);
         int teamID = intent.getIntExtra("team", 0);
         long parID = intent.getLongExtra("parent", 0);
+        long personID = intent.getLongExtra("personID", 0);
         Log.d("parID Value", "parID Value: " + parID);
         boolean isRostered = intent.getBooleanExtra("roster", false);
         TextView onTeam = findViewById(R.id.onTeam);
@@ -64,8 +64,22 @@ public class PlayerDetails extends AppCompatActivity {
             }
         }.execute(teamID);
 
+        Button deleteBtn = findViewById(R.id.deletePlayer);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
 
-        //String teamName = team.getTeamName();
+                        repo.deletePlayerByID(personID, parID);
+                        return null;
+                    }
+                }.execute();
+            finish();}
+        });
+
+
         TextView playerName = findViewById(R.id.playerNameDetails);
         playerName.setText(fullName);
 

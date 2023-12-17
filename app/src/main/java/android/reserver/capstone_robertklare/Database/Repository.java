@@ -103,6 +103,17 @@ public class Repository {
         });
     }
 
+    public void deletePlayerByID(long id, long parentid){
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mPlayerDAO.deletePlayerByID(id);
+                mParentDAO.deleteParentByID((int) parentid);
+                return null;
+            }
+        }.execute();
+    }
+
     public void updatePlayer(Player player) {
         databaseBuilder.databaseWriteExecutor.execute(() -> {
             mPlayerDAO.update(player);

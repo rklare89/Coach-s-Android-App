@@ -56,6 +56,7 @@ public class PickupList extends AppCompatActivity implements PickupListAdapter.O
         int playerNum = selectedPlayer.getNumber();
         int teamID = selectedPlayer.getTeamID();
         long parID = selectedPlayer.getParentID();
+        long playerID = selectedPlayer.getPersonID();
         Log.d("Parent ID:", "onItemClick: " + parID);
         boolean isRostered = selectedPlayer.isRostered();
 
@@ -69,6 +70,7 @@ public class PickupList extends AppCompatActivity implements PickupListAdapter.O
         intent.putExtra("team", teamID);
         intent.putExtra("parent", parID);
         intent.putExtra("roster", isRostered);
+        intent.putExtra("personID", playerID);
         startActivity(intent);
     }
 }

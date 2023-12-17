@@ -109,6 +109,7 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         int teamID = selectedPlayer.getTeamID();
         long parID = selectedPlayer.getParentID();
         Log.d("Parent ID:", "onItemClick: " + parID);
+        long playerID = selectedPlayer.getPersonID();
         boolean isRostered = selectedPlayer.isRostered();
 
         //Packages intent for Details Activity
@@ -121,6 +122,7 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         intent.putExtra("team", teamID);
         intent.putExtra("parent", parID);
         intent.putExtra("roster", isRostered);
+        intent.putExtra("personID", playerID);
         startActivity(intent);
 
     }

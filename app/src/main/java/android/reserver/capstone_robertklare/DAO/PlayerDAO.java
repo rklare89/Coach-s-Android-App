@@ -39,4 +39,7 @@ public interface PlayerDAO {
 
     @Query("UPDATE Players SET isRostered = 0 WHERE teamID = :teamid")
     void removePlayersFromDeletedTeam(int teamid);
+
+    @Query("DELETE FROM Players WHERE personID = :id;")
+    void deletePlayerByID(long id);
 }
