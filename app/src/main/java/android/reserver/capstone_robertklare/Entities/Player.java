@@ -11,13 +11,13 @@ public class Player extends Person {
     String position;
     int number;
     String dob;
-    int parentID;
+    long parentID;
     boolean isRostered;
 
 
 
     public Player(String firstName, String lastname, int teamID, String position, int number,
-                  String dob, int parentID, boolean isRostered) {
+                  String dob, long parentID, boolean isRostered) {
         super(firstName, lastname, teamID);
 
         this.position = position;
@@ -51,7 +51,7 @@ public class Player extends Person {
         this.dob = dob;
     }
 
-    public int getParentID() {
+    public long getParentID() {
         return parentID;
     }
 

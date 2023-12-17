@@ -6,20 +6,25 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
+import android.reserver.capstone_robertklare.Entities.Parent;
+import android.reserver.capstone_robertklare.Entities.Player;
 import android.reserver.capstone_robertklare.Entities.Team;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class PlayerDetails extends AppCompatActivity {
 
-    Repository repo = new Repository(getApplication());
+
     Team team;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_details);
+
+        Repository repo = new Repository(getApplication());
 
         Button donebtn = findViewById(R.id.Done);
         donebtn.setOnClickListener(new View.OnClickListener() {
@@ -38,9 +43,11 @@ public class PlayerDetails extends AppCompatActivity {
         String dob = intent.getStringExtra("DOB");
         int num = intent.getIntExtra("number", 0);
         int teamID = intent.getIntExtra("team", 0);
-        int parID = intent.getIntExtra("parent", 0);
+        long parID = intent.getLongExtra("parent", 0);
+        Log.d("parID Value", "parID Value: " + parID);
         boolean isRostered = intent.getBooleanExtra("roster", false);
         TextView onTeam = findViewById(R.id.onTeam);
+
 
         new AsyncTask<Integer, Void, Team>() {
             @Override
@@ -51,19 +58,15 @@ public class PlayerDetails extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Team result) {
-                // Handle the result on the main thread
-                // Update your UI with the team information
-                // For example, you can set text to TextViews, etc.
                 team = result;
                 updateUIWithTeamInfo(isRostered, onTeam);
             }
         }.execute(teamID);
 
+
         //String teamName = team.getTeamName();
         TextView playerName = findViewById(R.id.playerNameDetails);
         playerName.setText(fullName);
-
-
 
 
         TextView DOB = findViewById(R.id.Bday);
@@ -74,6 +77,16 @@ public class PlayerDetails extends AppCompatActivity {
         numView.setText(String.valueOf(num));
 
 
+        Button parentBtn = findViewById(R.id.parentButton);
+        parentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent parentIntent = new Intent(PlayerDetails.this, ParentDetails.class);
+                parentIntent.putExtra("parentID", parID);
+                startActivity(parentIntent);
+
+            }
+        });
 
 
 

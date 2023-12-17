@@ -1,6 +1,7 @@
 package android.reserver.capstone_robertklare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -60,6 +61,23 @@ public class AddPlayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Parent Information
+                //Parent First Name
+                EditText parentFirst = findViewById(R.id.editTextParentFirst);
+                String parentFirstName = parentFirst.getText().toString();
+                //Parent Last Name
+                EditText parentLast = findViewById(R.id.editTextParentLast);
+                String parentLastName = parentLast.getText().toString();
+                //Parent E-mail address
+                EditText parentEmail = findViewById(R.id.editTextTextEmailAddress);
+                String parentEmailAdd = parentEmail.getText().toString();
+                //Parent Phone Number
+                EditText parentPhone = findViewById(R.id.editTextPhone);
+                String parentPhoneNo = parentPhone.getText().toString();
+
+                Parent newParent = new Parent(parentFirstName, parentLastName, teamID, parentPhoneNo, parentEmailAdd, Role.PARENT);
+                long parentNo = repo.insertParent(newParent);
+
                 //Player First Name
                 EditText playerFirst = findViewById(R.id.editTextFirstName);
                 String newPlayerFirst = playerFirst.getText().toString();
@@ -78,27 +96,10 @@ public class AddPlayer extends AppCompatActivity {
                 String rostered = yesNo.getSelectedItem().toString();
                 boolean isRostered = rostered.equals("Yes");
                 //Player information collected
-                //Parent Information
-                //Parent First Name
-                EditText parentFirst = findViewById(R.id.editTextParentFirst);
-                String parentFirstName = parentFirst.getText().toString();
-                //Parent Last Name
-                EditText parentLast = findViewById(R.id.editTextParentLast);
-                String parentLastName = parentLast.getText().toString();
-                //Parent E-mail address
-                EditText parentEmail = findViewById(R.id.editTextTextEmailAddress);
-                String parentEmailAdd = parentEmail.getText().toString();
-                //Parent Phone Number
-                EditText parentPhone = findViewById(R.id.editTextPhone);
-                String parentPhoneNo = parentPhone.getText().toString();
 
-                Parent newParent = new Parent(parentFirstName, parentLastName, teamID, parentPhoneNo, parentEmailAdd, Role.PARENT);
-                repo.insertParent(newParent);
 
-                int parentNo = newParent.getPersonID();
-
+                //int parentNo = 0;   //need to assign inserted parent's "personID" to this value
                 Player newPlayer = new Player(newPlayerFirst, newPlayerLast, teamID, newPos, num, selectedDate, parentNo, isRostered);
-                newPlayer.setParentID(parentNo);
                 repo.insertPlayer(newPlayer);
                 finish();
 

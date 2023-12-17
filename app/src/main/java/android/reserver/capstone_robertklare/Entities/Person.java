@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class Person {
 
     @PrimaryKey(autoGenerate = true)
-    int personID;
+    long personID;
     String firstName;
     String lastname;
     int teamID;
@@ -18,7 +18,7 @@ public class Person {
         this.teamID = teamID;
     }
 
-    public int getPersonID() {
+    public long getPersonID() {
         return personID;
     }
 

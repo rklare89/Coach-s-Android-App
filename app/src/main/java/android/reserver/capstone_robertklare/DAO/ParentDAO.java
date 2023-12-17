@@ -17,7 +17,7 @@ import java.util.List;
 public interface ParentDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Parent parent);
+    long insert(Parent parent);
 
     @Update
     void update(Parent parent);
@@ -29,8 +29,8 @@ public interface ParentDAO {
     LiveData<List<Parent>> getAllParents();
 
     @Query("SELECT * FROM Parents Where personID = :id")
-    LiveData<Parent> getParentById(int id);
+    LiveData<Parent> getParentById(long id);
 
-    @Query("SELECT personID FROM Parents WHERE (firstName = :firstName AND lastname = :lastName);")
-    int getParentByNames(String firstName, String lastName);
+    @Query("SELECT * FROM Parents WHERE (firstName = :firstName AND lastname = :lastName);")
+    LiveData<Parent> getParentByNames(String firstName, String lastName);
 }

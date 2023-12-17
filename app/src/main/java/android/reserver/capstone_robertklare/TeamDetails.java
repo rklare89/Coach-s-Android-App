@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Player;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -82,7 +83,8 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         String playerDob = selectedPlayer.getDob();
         int playerNum = selectedPlayer.getNumber();
         int teamID = selectedPlayer.getTeamID();
-        int parID = selectedPlayer.getParentID();
+        long parID = selectedPlayer.getParentID();
+        Log.d("Parent ID:", "onItemClick: " + parID);
         boolean isRostered = selectedPlayer.isRostered();
 
         //Packages intent for Details Activity

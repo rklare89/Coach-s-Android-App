@@ -11,6 +11,7 @@ import android.reserver.capstone_robertklare.Entities.Team;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class Repository {
 
@@ -104,17 +105,24 @@ public class Repository {
         return mParentDAO.getAllParents();
     }
 
-    public LiveData<Parent> getParentById(int parentId) {
+    public LiveData<Parent> getParentById(long parentId) {
         return mParentDAO.getParentById(parentId);
     }
-    public int getParentByNames(String firstName, String LastName) {
+    public LiveData<Parent> getParentByNames(String firstName, String LastName) {
         return mParentDAO.getParentByNames(firstName, LastName);
     }
 
-    public void insertParent(Parent parent) {
-        databaseBuilder.databaseWriteExecutor.execute(() -> {
-            mParentDAO.insert(parent);
-        });
+    public long insertParent(Parent parent) {
+        // Use a Callable to get the inserted ID
+        Callable<Long> insertCallable = () -> mParentDAO.insert(parent);
+
+        try {
+            // Run the insert operation on a separate thread and get the ID
+            return databaseBuilder.databaseWriteExecutor.submit(insertCallable).get();
+        } catch (Exception e) {
+            // Handle exceptions as needed
+            return -1; // Or any other appropriate value indicating failure
+        }
     }
 
     public void updateParent(Parent parent) {
