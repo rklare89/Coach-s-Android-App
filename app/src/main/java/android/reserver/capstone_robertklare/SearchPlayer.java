@@ -1,17 +1,16 @@
 package android.reserver.capstone_robertklare;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Player;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -27,12 +26,7 @@ public class SearchPlayer extends AppCompatActivity implements PlayerListAdapter
 
         repo = new Repository(getApplication());
         Button doneBtn = findViewById(R.id.searchDoneButton);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        doneBtn.setOnClickListener(v -> finish());
 
         //RecyclerView
         RecyclerView recyclerView = findViewById(R.id.searchList);
@@ -42,10 +36,7 @@ public class SearchPlayer extends AppCompatActivity implements PlayerListAdapter
         adapter = new PlayerListAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
-        repo.getAllPlayers().observe(this, player -> {
-            adapter.setPlayers(player);
-
-        });
+        repo.getAllPlayers().observe(this, player -> adapter.setPlayers(player));
 
 
 

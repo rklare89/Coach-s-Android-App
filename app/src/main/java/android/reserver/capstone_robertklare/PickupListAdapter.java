@@ -40,12 +40,9 @@ public class PickupListAdapter extends RecyclerView.Adapter<PickupListViewHolder
         Player currentPlayer = playerList.get(position);
         holder.bindData(currentPlayer);
 
-        holder.cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position);
-                }
+        holder.cardview.setOnClickListener(v -> {
+            if(onItemClickListener != null) {
+                onItemClickListener.onItemClick(position);
             }
         });
 

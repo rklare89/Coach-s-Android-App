@@ -1,22 +1,16 @@
 package android.reserver.capstone_robertklare;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
-import android.reserver.capstone_robertklare.Entities.Player;
 import android.reserver.capstone_robertklare.Entities.Team;
-import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements TeamListAdapter.OnItemClickListener {
 
@@ -30,32 +24,23 @@ public class MainActivity extends AppCompatActivity implements TeamListAdapter.O
         Button addTeamBtn = findViewById(R.id.addTeamBtn);
         Button pickupPlayer = findViewById(R.id.pickupBtn);
         Button searchBtn = findViewById(R.id.searchMain);
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent searchIntent = new Intent(MainActivity.this, SearchPlayer.class);
-                startActivity(searchIntent);
-            }
+        searchBtn.setOnClickListener(v -> {
+            Intent searchIntent = new Intent(MainActivity.this, SearchPlayer.class);
+            startActivity(searchIntent);
         });
 
 
 
-        pickupPlayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent pickupIntent = new Intent(MainActivity.this, PickupList.class);
-                startActivity(pickupIntent);
-            }
+        pickupPlayer.setOnClickListener(v -> {
+            Intent pickupIntent = new Intent(MainActivity.this, PickupList.class);
+            startActivity(pickupIntent);
         });
         Repository repo = new Repository(getApplication());
 
 
-        addTeamBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddTeam.class);
-                startActivity(intent);
-            }
+        addTeamBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddTeam.class);
+            startActivity(intent);
         });
 
         RecyclerView recyclerView = findViewById(R.id.teamList);

@@ -8,12 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 public class MyViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView teamNameTextView;
-    private TextView teamAgeGroupTextView;
+    private final TextView teamNameTextView;
+    private final TextView teamAgeGroupTextView;
     CardView cardView;
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);

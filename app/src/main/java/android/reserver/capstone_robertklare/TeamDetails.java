@@ -1,22 +1,18 @@
 package android.reserver.capstone_robertklare;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.AsyncQueryHandler;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Player;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -25,7 +21,6 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
     private PlayerListAdapter adapter;
     Repository repo;
     private int teamID;
-    private static final String TEAM_ID_KEY = "team_id_key";
 
 
     @Override
@@ -56,38 +51,33 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         adapter = new PlayerListAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
-        repo.getPlayersByTeamID(teamID).observe(this, player -> {
-            adapter.setPlayers(player);
-        });
+        repo.getPlayersByTeamID(teamID).observe(this, player -> adapter.setPlayers(player));
+
+        Button doneBtn = findViewById(R.id.doneBtnTD);
+        doneBtn.setOnClickListener(v -> finish());
 
         Button deleteBtn = findViewById(R.id.deleteTeamButton);
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        deleteBtn.setOnClickListener(v -> {
 
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... voids) {
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
 
-                        repo.removePlayersFromTeam(teamID);
-                        repo.deleteTeamById(teamID);
-                        return null;
-                    }
-                }.execute();
+                    repo.removePlayersFromTeam(teamID);
+                    repo.deleteTeamById(teamID);
+                    return null;
+                }
+            }.execute();
 
-            finish();
-            }
+        finish();
         });
 
         Button addBtn = findViewById(R.id.addPlayerButton);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addIntent = new Intent(TeamDetails.this, AddPlayer.class);
-                addIntent.putExtra("id", teamID);
-                addIntent.putExtra("age", teamAge);
-                startActivity(addIntent);
-            }
+        addBtn.setOnClickListener(v -> {
+            Intent addIntent = new Intent(TeamDetails.this, AddPlayer.class);
+            addIntent.putExtra("id", teamID);
+            addIntent.putExtra("age", teamAge);
+            startActivity(addIntent);
         });
 
     }
@@ -137,9 +127,7 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         adapter = new PlayerListAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
-        repo.getPlayersByTeamID(teamID).observe(this, player -> {
-            adapter.setPlayers(player);
-        });
+        repo.getPlayersByTeamID(teamID).observe(this, player -> adapter.setPlayers(player));
 
 
     }

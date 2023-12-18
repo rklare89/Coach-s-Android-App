@@ -1,17 +1,16 @@
 package android.reserver.capstone_robertklare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Team;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddTeam extends AppCompatActivity {
 
@@ -24,12 +23,9 @@ public class AddTeam extends AppCompatActivity {
 
         //Code to get the back button working
         Button backBtn = findViewById(R.id.addTeamBackBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddTeam.this, MainActivity.class);
-                startActivity(intent);
-            }
+        backBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(AddTeam.this, MainActivity.class);
+            startActivity(intent);
         });
 
         //Code for the drop down list.  Makes sure data is in correct format.
@@ -39,25 +35,22 @@ public class AddTeam extends AppCompatActivity {
         ageSpinner.setAdapter(adapter);
 
         Button saveBtn = findViewById(R.id.addTeamSaveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveBtn.setOnClickListener(v -> {
 
-                Team newTeam = new Team();
+            Team newTeam = new Team();
 
-                EditText teamName = findViewById(R.id.insertTeamName);
-                String teamString = sanitize(teamName.getText().toString().trim());
-                String newAge = ageSpinner.getSelectedItem().toString();
-                if (!(teamString.isEmpty())) {
-                    newTeam.setTeamName(teamString);
-                    newTeam.setAgeGroup(newAge);
-                    repo.insertTeam(newTeam);
-                    Toast.makeText(AddTeam.this, "Team Added!", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                else {
-                    Toast.makeText(AddTeam.this, "Team Name is Empty! Try Again!", Toast.LENGTH_SHORT).show();
-                }
+            EditText teamName = findViewById(R.id.insertTeamName);
+            String teamString = sanitize(teamName.getText().toString().trim());
+            String newAge = ageSpinner.getSelectedItem().toString();
+            if (!(teamString.isEmpty())) {
+                newTeam.setTeamName(teamString);
+                newTeam.setAgeGroup(newAge);
+                repo.insertTeam(newTeam);
+                Toast.makeText(AddTeam.this, "Team Added!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            else {
+                Toast.makeText(AddTeam.this, "Team Name is Empty! Try Again!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -70,7 +63,7 @@ public class AddTeam extends AppCompatActivity {
     }
 
     public String removeLetters(String string) {
-        String regex = "[\\D]";
+        String regex = "\\D";
         return string.replaceAll(regex, "");
     }
 }

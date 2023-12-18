@@ -1,10 +1,6 @@
 package android.reserver.capstone_robertklare;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Database.parentViewModel;
@@ -18,7 +14,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.Objects;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 public class EditPlayer extends AppCompatActivity {
 
@@ -34,7 +31,6 @@ public class EditPlayer extends AppCompatActivity {
     private Repository repo;
     private Parent parent;
     private Player player;
-    private parentViewModel parentvm;
     private String selectedDate;
 
 
@@ -66,7 +62,7 @@ public class EditPlayer extends AppCompatActivity {
 
         date = findViewById(R.id.datePickerEdit);
         String dob = getIntent.getStringExtra("dob");
-        String[] birthday = new String[3];
+        String[] birthday;
         assert dob != null;
         birthday = dob.split("/", 3);
         int[] birthDays = new int[3];
@@ -79,7 +75,7 @@ public class EditPlayer extends AppCompatActivity {
         long parID = getIntent.getLongExtra("parid", 0);
 
 
-        parentvm = new ViewModelProvider(this).get(parentViewModel.class);
+        parentViewModel parentvm = new ViewModelProvider(this).get(parentViewModel.class);
         parentvm.getParentById(parID).observe(this, parent -> {
             if (parent !=null) {
                 String pfirst = parent.getFirstName();
@@ -116,56 +112,45 @@ public class EditPlayer extends AppCompatActivity {
         }
 
         Button cancelBtn = findViewById(R.id.cancelEditPlayer);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        cancelBtn.setOnClickListener(v -> finish());
 
         int teamID = getIntent.getIntExtra("teamid", 0);
 
         Button saveBtn = findViewById(R.id.savePlayer);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveBtn.setOnClickListener(v -> {
 
-                String newParFName = sanitize(parFirst.getText().toString().trim());
-                String newParLName = sanitize(parLast.getText().toString().trim());
-                String newParPhone = phone.getText().toString().trim();
-                String newEmail = email.getText().toString().trim();
+            String newParFName = sanitize(parFirst.getText().toString().trim());
+            String newParLName = sanitize(parLast.getText().toString().trim());
+            String newParPhone = phone.getText().toString().trim();
+            String newEmail = email.getText().toString().trim();
 
-                parent = new Parent(parID, newParFName, newParLName, teamID, newParPhone, newEmail, Role.PARENT);
+            parent = new Parent(parID, newParFName, newParLName, teamID, newParPhone, newEmail, Role.PARENT);
 
 
-                long newPlayerID = getIntent.getLongExtra("playerid", 0);
-                String newPlayerFName = sanitize(firstName.getText().toString().trim());
-                String newPlayerLName = sanitize(lastName.getText().toString().trim());
-                String newPosition = pos.getText().toString().trim();
-                String newNum = removeLetters(sanitize(num.getText().toString().trim()));
-                int NewNum = Integer.parseInt(newNum);
-                boolean rostered = rosterSpinner.getSelectedItem().toString().equals("Yes");
+            long newPlayerID = getIntent.getLongExtra("playerid", 0);
+            String newPlayerFName = sanitize(firstName.getText().toString().trim());
+            String newPlayerLName = sanitize(lastName.getText().toString().trim());
+            String newPosition = pos.getText().toString().trim();
+            String newNum = removeLetters(sanitize(num.getText().toString().trim()));
+            int NewNum = Integer.parseInt(newNum);
+            boolean rostered = rosterSpinner.getSelectedItem().toString().equals("Yes");
 
 
-                date.init(date.getYear(), date.getMonth(), date.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
-                    @Override
-                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        // Convert the selected date to a string
-                        selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + year;
-                    }
-                });
+            date.init(date.getYear(), date.getMonth(), date.getDayOfMonth(), (view, year, monthOfYear, dayOfMonth) -> {
+                // Convert the selected date to a string
+                selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + year;
+            });
 
-                if (selectedDate == null){
-                    selectedDate = dob;
-                }
-
-                player = new Player(newPlayerID, newPlayerFName, newPlayerLName, teamID, newPosition, NewNum, selectedDate, parID, rostered);
-
-                repo.updateParent(parent);
-                repo.updatePlayer(player);
-                finish();
-
+            if (selectedDate == null){
+                selectedDate = dob;
             }
+
+            player = new Player(newPlayerID, newPlayerFName, newPlayerLName, teamID, newPosition, NewNum, selectedDate, parID, rostered);
+
+            repo.updateParent(parent);
+            repo.updatePlayer(player);
+            finish();
+
         });
 
     }
@@ -177,7 +162,7 @@ public class EditPlayer extends AppCompatActivity {
     }
 
     public String removeLetters(String string) {
-        String regex = "[\\D]";
+        String regex = "\\D";
         return string.replaceAll(regex, "");
     }
 

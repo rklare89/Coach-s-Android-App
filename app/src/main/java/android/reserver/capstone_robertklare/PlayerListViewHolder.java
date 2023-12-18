@@ -1,20 +1,19 @@
 package android.reserver.capstone_robertklare;
 
 import android.reserver.capstone_robertklare.Entities.Player;
-import android.reserver.capstone_robertklare.Entities.Team;
 import android.view.View;
 import android.widget.TextView;
-import androidx.cardview.widget.CardView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PlayerListViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView firstNameTextView;
-    private TextView lastNameTextView;
-    private TextView positionTextView;
-    private TextView birthYearTextView;
+    private final TextView firstNameTextView;
+    private final TextView lastNameTextView;
+    private final TextView positionTextView;
+    private final TextView birthYearTextView;
     CardView cardview;
 
     public PlayerListViewHolder(@NonNull View itemView) {

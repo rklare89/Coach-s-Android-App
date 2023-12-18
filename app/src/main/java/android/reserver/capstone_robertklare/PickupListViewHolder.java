@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PickupListViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView firstNameTextView;
-    private TextView lastNameTextView;
-    private TextView positionTextView;
-    private TextView birthYearTextView;
+    private final TextView firstNameTextView;
+    private final TextView lastNameTextView;
+    private final TextView positionTextView;
+    private final TextView birthYearTextView;
     CardView cardview;
 
     public PickupListViewHolder(@NonNull View itemView) {

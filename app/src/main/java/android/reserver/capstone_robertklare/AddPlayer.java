@@ -8,6 +8,7 @@ import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Parent;
 import android.reserver.capstone_robertklare.Entities.Player;
 import android.reserver.capstone_robertklare.Enum.Role;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,20 +37,12 @@ public class AddPlayer extends AppCompatActivity {
         rosterSpinner.setAdapter(adapter);
 
         Button cancelBtn = findViewById(R.id.cancelAddPlayer);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        cancelBtn.setOnClickListener(v -> finish());
 
         DatePicker datePicker = findViewById(R.id.datePicker);
-        datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                // Convert the selected date to a string
-                selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + year;
-            }
+        datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), (view, year, monthOfYear, dayOfMonth) -> {
+            // Convert the selected date to a string
+            selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + year;
         });
 
         Button addBtn = findViewById(R.id.addPlayer);
@@ -69,6 +62,7 @@ public class AddPlayer extends AppCompatActivity {
                 String parentEmailAdd = parentEmail.getText().toString();
                 //Parent Phone Number
                 EditText parentPhone = findViewById(R.id.editTextPhone);
+                parentPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
                 String parentPhoneNo = parentPhone.getText().toString();
 
                 Parent newParent = new Parent(parentFirstName, parentLastName, teamID, parentPhoneNo, parentEmailAdd, Role.PARENT);
@@ -113,7 +107,7 @@ public class AddPlayer extends AppCompatActivity {
     }
 
     public String removeLetters(String string) {
-        String regex = "[\\D]";
+        String regex = "\\D";
         return string.replaceAll(regex, "");
     }
 }

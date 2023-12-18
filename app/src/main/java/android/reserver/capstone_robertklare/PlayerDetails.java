@@ -1,18 +1,16 @@
 package android.reserver.capstone_robertklare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
-import android.reserver.capstone_robertklare.Entities.Parent;
-import android.reserver.capstone_robertklare.Entities.Player;
 import android.reserver.capstone_robertklare.Entities.Team;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PlayerDetails extends AppCompatActivity {
 
@@ -27,12 +25,7 @@ public class PlayerDetails extends AppCompatActivity {
         repo = new Repository(getApplication());
 
         Button donebtn = findViewById(R.id.Done);
-        donebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        donebtn.setOnClickListener(v -> finish());
 
         //TODO: Create Edit Button
 
@@ -113,13 +106,10 @@ public class PlayerDetails extends AppCompatActivity {
 
 
         Button parentBtn = findViewById(R.id.parentButton);
-        parentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent parentIntent = new Intent(PlayerDetails.this, ParentDetails.class);
-                parentIntent.putExtra("parentID", parID);
-                startActivity(parentIntent);
-            }
+        parentBtn.setOnClickListener(v -> {
+            Intent parentIntent = new Intent(PlayerDetails.this, ParentDetails.class);
+            parentIntent.putExtra("parentID", parID);
+            startActivity(parentIntent);
         });
     }
 
@@ -128,14 +118,14 @@ public class PlayerDetails extends AppCompatActivity {
         if (team != null) {
             String teamName = team.getTeamName();
             // Update relevant TextViews with team information
+            String message;
             if (isRostered) {
-                String message = "Rostered with " + teamName;
-                onTeam.setText(message);
+                message = "Rostered with " + teamName;
             }
             else {
-                String message = "Pickup Player";
-                onTeam.setText(message);
+                message = "Pickup Player";
             }
+            onTeam.setText(message);
         }
         else {
             String message = "Pickup Player";

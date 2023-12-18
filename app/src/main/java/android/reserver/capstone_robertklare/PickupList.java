@@ -1,16 +1,15 @@
 package android.reserver.capstone_robertklare;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Player;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -33,17 +32,10 @@ public class PickupList extends AppCompatActivity implements PickupListAdapter.O
         adapter = new PickupListAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
-        repo.getPlayersNotRostered().observe(this, player -> {
-            adapter.setPlayers(player);
-        });
+        repo.getPlayersNotRostered().observe(this, player -> adapter.setPlayers(player));
 
         Button doneBtn = findViewById(R.id.pickupDone);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        doneBtn.setOnClickListener(v -> finish());
     }
 
     @Override

@@ -4,10 +4,8 @@ import android.reserver.capstone_robertklare.Entities.Team;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 public class TeamListAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
     private List<Team> teamList;
-    private OnItemClickListener onItemClickListener;
+    private final OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -40,14 +38,11 @@ public class TeamListAdapter extends RecyclerView.Adapter<MyViewHolder>{
         Team currentTeam = teamList.get(position);
         holder.bindData(currentTeam);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position);
-                }
-
+        holder.cardView.setOnClickListener(v -> {
+            if(onItemClickListener != null) {
+                onItemClickListener.onItemClick(position);
             }
+
         });
 
     }
