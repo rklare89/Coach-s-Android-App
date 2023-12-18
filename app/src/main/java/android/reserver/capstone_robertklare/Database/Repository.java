@@ -108,7 +108,7 @@ public class Repository {
             @Override
             protected Void doInBackground(Void... voids) {
                 mPlayerDAO.deletePlayerByID(id);
-                mParentDAO.deleteParentByID((int) parentid);
+                mParentDAO.deleteParentByID(parentid);
                 return null;
             }
         }.execute();

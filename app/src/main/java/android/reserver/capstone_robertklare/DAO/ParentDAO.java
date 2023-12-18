@@ -41,5 +41,5 @@ public interface ParentDAO {
     String getParentLastName(long id);
 
     @Query("DELETE FROM Parents WHERE personID = :id;")
-    void deleteParentByID(int id);
+    void deleteParentByID(long id);
 }

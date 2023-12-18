@@ -1,9 +1,7 @@
 package android.reserver.capstone_robertklare;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
@@ -16,8 +14,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import java.util.Calendar;
 
 public class AddPlayer extends AppCompatActivity {
 

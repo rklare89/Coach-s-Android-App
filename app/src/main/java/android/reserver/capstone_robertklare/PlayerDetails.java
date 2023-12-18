@@ -64,6 +64,25 @@ public class PlayerDetails extends AppCompatActivity {
             }
         }.execute(teamID);
 
+
+        Button editBtn = findViewById(R.id.Edit);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editIntent = new Intent(PlayerDetails.this, EditPlayer.class);
+                editIntent.putExtra("firstName", firstName);
+                editIntent.putExtra("lastName", lastName);
+                editIntent.putExtra("position", position);
+                editIntent.putExtra("dob", dob);
+                editIntent.putExtra("num", num);
+                editIntent.putExtra("teamid", teamID);
+                editIntent.putExtra("parid", parID);
+                editIntent.putExtra("playerid", personID);
+                editIntent.putExtra("isRostered", isRostered);
+                startActivity(editIntent);
+            }
+        });
+
         Button deleteBtn = findViewById(R.id.deletePlayer);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
