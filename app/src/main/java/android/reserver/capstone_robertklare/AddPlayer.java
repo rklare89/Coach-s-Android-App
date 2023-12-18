@@ -60,10 +60,10 @@ public class AddPlayer extends AppCompatActivity {
                 //Parent Information
                 //Parent First Name
                 EditText parentFirst = findViewById(R.id.editTextParentFirst);
-                String parentFirstName = parentFirst.getText().toString();
+                String parentFirstName = sanitize(parentFirst.getText().toString());
                 //Parent Last Name
                 EditText parentLast = findViewById(R.id.editTextParentLast);
-                String parentLastName = parentLast.getText().toString();
+                String parentLastName = sanitize(parentLast.getText().toString());
                 //Parent E-mail address
                 EditText parentEmail = findViewById(R.id.editTextTextEmailAddress);
                 String parentEmailAdd = parentEmail.getText().toString();
@@ -76,13 +76,13 @@ public class AddPlayer extends AppCompatActivity {
 
                 //Player First Name
                 EditText playerFirst = findViewById(R.id.editTextFirstName);
-                String newPlayerFirst = playerFirst.getText().toString();
+                String newPlayerFirst = sanitize(playerFirst.getText().toString());
                 //Player Last Name
                 EditText playerLast = findViewById(R.id.editTextLastName);
-                String newPlayerLast = playerLast.getText().toString();
+                String newPlayerLast = sanitize(playerLast.getText().toString());
                 //Player Number
                 EditText playerNum = findViewById(R.id.editTextNumber);
-                String nu = playerNum.getText().toString();
+                String nu = removeLetters(sanitize(playerNum.getText().toString()));
                 int num = Integer.parseInt(nu);
                 //Player Position
                 EditText playerPos = findViewById(R.id.editTextPosition);
@@ -103,5 +103,17 @@ public class AddPlayer extends AppCompatActivity {
         });
 
 
+    }
+
+
+    //Data Sanitation Methods
+    public String sanitize(String string) {
+        String regex = "[^a-zA-Z0-9\\s]";
+        return string.replaceAll(regex, "");
+    }
+
+    public String removeLetters(String string) {
+        String regex = "[\\D]";
+        return string.replaceAll(regex, "");
     }
 }

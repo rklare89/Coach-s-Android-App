@@ -58,6 +58,7 @@ public class SearchPlayer extends AppCompatActivity implements PlayerListAdapter
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                newText = sanitize(newText);
                 filterData(newText);
                 return true;
             }
@@ -102,5 +103,14 @@ public class SearchPlayer extends AppCompatActivity implements PlayerListAdapter
         intent.putExtra("personID", playerID);
         startActivity(intent);
     }
+
+
+    //Function to sanitize data
+    public String sanitize(String string) {
+        String regex = "[^a-zA-Z0-9\\s]";
+        return string.replaceAll(regex, "");
+    }
+
+
 
 }

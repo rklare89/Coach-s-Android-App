@@ -46,7 +46,7 @@ public class AddTeam extends AppCompatActivity {
                 Team newTeam = new Team();
 
                 EditText teamName = findViewById(R.id.insertTeamName);
-                String teamString = teamName.getText().toString().trim();
+                String teamString = sanitize(teamName.getText().toString().trim());
                 String newAge = ageSpinner.getSelectedItem().toString();
                 if (!(teamString.isEmpty())) {
                     newTeam.setTeamName(teamString);
@@ -58,12 +58,19 @@ public class AddTeam extends AppCompatActivity {
                 else {
                     Toast.makeText(AddTeam.this, "Team Name is Empty! Try Again!", Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
         });
 
 
+    }
+    //Data Sanitation Functions
+    public String sanitize(String string) {
+        String regex = "[^a-zA-Z0-9\\s]";
+        return string.replaceAll(regex, "");
+    }
+
+    public String removeLetters(String string) {
+        String regex = "[\\D]";
+        return string.replaceAll(regex, "");
     }
 }

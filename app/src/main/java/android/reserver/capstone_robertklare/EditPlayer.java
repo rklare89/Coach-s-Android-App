@@ -22,23 +22,19 @@ import java.util.Objects;
 
 public class EditPlayer extends AppCompatActivity {
 
-    EditText firstName;
-    EditText lastName;
-    EditText num;
-    EditText pos;
-    EditText parFirst;
-    EditText parLast;
-    EditText email;
-    EditText phone;
-
-    DatePicker date;
-
-    Repository repo;
-    Parent parent;
-    Player player;
-
+    private EditText firstName;
+    private EditText lastName;
+    private EditText num;
+    private EditText pos;
+    private EditText parFirst;
+    private EditText parLast;
+    private EditText email;
+    private EditText phone;
+    private DatePicker date;
+    private Repository repo;
+    private Parent parent;
+    private Player player;
     private parentViewModel parentvm;
-
     private String selectedDate;
 
 
@@ -70,11 +66,12 @@ public class EditPlayer extends AppCompatActivity {
 
         date = findViewById(R.id.datePickerEdit);
         String dob = getIntent.getStringExtra("dob");
-        String birthday[] = new String[3];
+        String[] birthday = new String[3];
+        assert dob != null;
         birthday = dob.split("/", 3);
-        int birthDays[] = new int[3];
+        int[] birthDays = new int[3];
         for(int i = 0; i < 3; i++) {
-            birthDays[i] = Integer.valueOf(birthday[i]);
+            birthDays[i] = Integer.parseInt(birthday[i]);
         }
 
         date.init(birthDays[2], (birthDays[0] - 1), birthDays[1], null);
@@ -133,8 +130,8 @@ public class EditPlayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String newParFName = parFirst.getText().toString().trim();
-                String newParLName = parLast.getText().toString().trim();
+                String newParFName = sanitize(parFirst.getText().toString().trim());
+                String newParLName = sanitize(parLast.getText().toString().trim());
                 String newParPhone = phone.getText().toString().trim();
                 String newEmail = email.getText().toString().trim();
 
@@ -142,11 +139,11 @@ public class EditPlayer extends AppCompatActivity {
 
 
                 long newPlayerID = getIntent.getLongExtra("playerid", 0);
-                String newPlayerFName = firstName.getText().toString().trim();
-                String newPlayerLName = lastName.getText().toString().trim();
+                String newPlayerFName = sanitize(firstName.getText().toString().trim());
+                String newPlayerLName = sanitize(lastName.getText().toString().trim());
                 String newPosition = pos.getText().toString().trim();
-                String newNum = num.getText().toString().trim();
-                int NewNum = Integer.valueOf(newNum);
+                String newNum = removeLetters(sanitize(num.getText().toString().trim()));
+                int NewNum = Integer.parseInt(newNum);
                 boolean rostered = rosterSpinner.getSelectedItem().toString().equals("Yes");
 
 
@@ -162,20 +159,26 @@ public class EditPlayer extends AppCompatActivity {
                     selectedDate = dob;
                 }
 
-                //Player(long personID, String firstName, String lastname, int teamID, String position, int number,
-                //                  String dob, long parentID, boolean isRostered)
-
                 player = new Player(newPlayerID, newPlayerFName, newPlayerLName, teamID, newPosition, NewNum, selectedDate, parID, rostered);
 
                 repo.updateParent(parent);
                 repo.updatePlayer(player);
                 finish();
 
-
             }
         });
 
     }
 
+    //Data Sanitation Functions
+    public String sanitize(String string) {
+        String regex = "[^a-zA-Z0-9\\s]";
+        return string.replaceAll(regex, "");
+    }
+
+    public String removeLetters(String string) {
+        String regex = "[\\D]";
+        return string.replaceAll(regex, "");
+    }
 
 }
