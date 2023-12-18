@@ -42,4 +42,7 @@ public interface PlayerDAO {
 
     @Query("DELETE FROM Players WHERE personID = :id;")
     void deletePlayerByID(long id);
+
+    @Query("SELECT * FROM Players WHERE firstName LIKE :search OR lastname LIKE :search")
+    LiveData<List<Player>> searchPlayers(String search);
 }

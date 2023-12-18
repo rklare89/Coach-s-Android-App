@@ -103,6 +103,10 @@ public class Repository {
         });
     }
 
+    public LiveData<List<Player>> searchPlayers(String search){
+        return mPlayerDAO.searchPlayers("%" + search + "%");
+    }
+
     public void deletePlayerByID(long id, long parentid){
         new AsyncTask<Void, Void, Void>() {
             @Override

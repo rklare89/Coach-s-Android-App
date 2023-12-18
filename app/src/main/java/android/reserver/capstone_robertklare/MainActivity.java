@@ -1,6 +1,7 @@
 package android.reserver.capstone_robertklare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.reserver.capstone_robertklare.Entities.Player;
 import android.reserver.capstone_robertklare.Entities.Team;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,16 @@ public class MainActivity extends AppCompatActivity implements TeamListAdapter.O
 
         Button addTeamBtn = findViewById(R.id.addTeamBtn);
         Button pickupPlayer = findViewById(R.id.pickupBtn);
+        Button searchBtn = findViewById(R.id.searchMain);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchIntent = new Intent(MainActivity.this, SearchPlayer.class);
+                startActivity(searchIntent);
+            }
+        });
+
+
 
         pickupPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
