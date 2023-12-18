@@ -90,7 +90,7 @@ public class AddPlayer extends AppCompatActivity {
                 //Player information collected
 
 
-                if (isValidEmail(parentEmailAdd)) {
+                if (isValidEmail(parentEmailAdd) && isValidPhone(parentPhoneNo)) {
 
                     Parent newParent = new Parent(parentFirstName, parentLastName, teamID, parentPhoneNo, parentEmailAdd, Role.PARENT);
                     long parentNo = repo.insertParent(newParent);
@@ -99,8 +99,14 @@ public class AddPlayer extends AppCompatActivity {
                     repo.insertPlayer(newPlayer);
                     finish();
                 }
-                else {
+                else if(!isValidEmail(parentEmailAdd) && (isValidPhone(parentPhoneNo))) {
                     Toast.makeText(AddPlayer.this, "Check Your Email Address. example@gmail.com", Toast.LENGTH_SHORT).show();
+                }
+                else if (isValidEmail(parentEmailAdd) && !(isValidPhone(parentPhoneNo))){
+                    Toast.makeText(AddPlayer.this, "Check Your Phone Number.  (xxx) xxx-xxxx", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(AddPlayer.this, "Enter Valid Phone and E-mail", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -128,6 +134,17 @@ public class AddPlayer extends AppCompatActivity {
         }
         Pattern p = Pattern.compile(EMAIL_REGULAR_EXPRESSION);
         Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
+    public boolean isValidPhone (String phone) {
+        final String PHONE_REGULAR_EXPRESSION = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
+
+        if (phone == null) {
+            return false;
+        }
+        Pattern p = Pattern.compile(PHONE_REGULAR_EXPRESSION);
+        Matcher m = p.matcher("(202) 555-0125");
         return m.matches();
     }
 }
