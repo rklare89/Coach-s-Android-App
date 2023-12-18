@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddPlayer extends AppCompatActivity {
 
@@ -65,8 +69,6 @@ public class AddPlayer extends AppCompatActivity {
                 parentPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
                 String parentPhoneNo = parentPhone.getText().toString();
 
-                Parent newParent = new Parent(parentFirstName, parentLastName, teamID, parentPhoneNo, parentEmailAdd, Role.PARENT);
-                long parentNo = repo.insertParent(newParent);
 
                 //Player First Name
                 EditText playerFirst = findViewById(R.id.editTextFirstName);
@@ -88,10 +90,18 @@ public class AddPlayer extends AppCompatActivity {
                 //Player information collected
 
 
-                //int parentNo = 0;   //need to assign inserted parent's "personID" to this value
-                Player newPlayer = new Player(newPlayerFirst, newPlayerLast, teamID, newPos, num, selectedDate, parentNo, isRostered);
-                repo.insertPlayer(newPlayer);
-                finish();
+                if (isValidEmail(parentEmailAdd)) {
+
+                    Parent newParent = new Parent(parentFirstName, parentLastName, teamID, parentPhoneNo, parentEmailAdd, Role.PARENT);
+                    long parentNo = repo.insertParent(newParent);
+                    //int parentNo = 0;   //need to assign inserted parent's "personID" to this value
+                    Player newPlayer = new Player(newPlayerFirst, newPlayerLast, teamID, newPos, num, selectedDate, parentNo, isRostered);
+                    repo.insertPlayer(newPlayer);
+                    finish();
+                }
+                else {
+                    Toast.makeText(AddPlayer.this, "Check Your Email Address. example@gmail.com", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -109,5 +119,15 @@ public class AddPlayer extends AppCompatActivity {
     public String removeLetters(String string) {
         String regex = "\\D";
         return string.replaceAll(regex, "");
+    }
+
+    public boolean isValidEmail (String email) {
+        final String EMAIL_REGULAR_EXPRESSION = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        if (email == null) {
+            return false;
+        }
+        Pattern p = Pattern.compile(EMAIL_REGULAR_EXPRESSION);
+        Matcher m = p.matcher(email);
+        return m.matches();
     }
 }

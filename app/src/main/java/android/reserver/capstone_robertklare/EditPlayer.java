@@ -13,9 +13,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EditPlayer extends AppCompatActivity {
 
@@ -147,9 +151,15 @@ public class EditPlayer extends AppCompatActivity {
 
             player = new Player(newPlayerID, newPlayerFName, newPlayerLName, teamID, newPosition, NewNum, selectedDate, parID, rostered);
 
-            repo.updateParent(parent);
-            repo.updatePlayer(player);
-            finish();
+            if(isValidEmail(newEmail)) {
+
+                repo.updateParent(parent);
+                repo.updatePlayer(player);
+                finish();
+            }
+            else {
+                Toast.makeText(EditPlayer.this, "Check Your Email Address. example@gmail.com", Toast.LENGTH_SHORT).show();
+            }
 
         });
 
@@ -164,6 +174,15 @@ public class EditPlayer extends AppCompatActivity {
     public String removeLetters(String string) {
         String regex = "\\D";
         return string.replaceAll(regex, "");
+    }
+    public boolean isValidEmail (String email) {
+        final String EMAIL_REGULAR_EXPRESSION = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        if (email == null) {
+            return false;
+        }
+        Pattern p = Pattern.compile(EMAIL_REGULAR_EXPRESSION);
+        Matcher m = p.matcher(email);
+        return m.matches();
     }
 
 }
