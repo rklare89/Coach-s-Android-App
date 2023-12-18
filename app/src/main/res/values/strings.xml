@@ -47,6 +47,7 @@
     <string name="add">Add!</string>
     <string name="parentname">ParentName</string>
     <string name="edit_player_parent">Edit Player/Parent</string>
+    <string name="save">Save!</string>
     <string-array name="Ages">
         <item>8U</item>
         <item>10U</item>

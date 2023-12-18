@@ -40,12 +40,8 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         String teamName = intent.getStringExtra("team");
         String teamAge = intent.getStringExtra("age");
 
-        if (savedInstanceState != null) {
-            teamID = savedInstanceState.getInt(TEAM_ID_KEY, 0);
-        } else {
+        teamID = intent.getIntExtra("id", 0);
 
-            teamID = intent.getIntExtra("id", 0);
-        }
 
 
         TextView teamNameBox = findViewById(R.id.detailsTeamName);
@@ -134,12 +130,15 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
 
 
 
-        // Refresh data when returning to the activity
+        RecyclerView recyclerView = findViewById(R.id.playerList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new PlayerListAdapter(new ArrayList<>(), this);
+        recyclerView.setAdapter(adapter);
+
         repo.getPlayersByTeamID(teamID).observe(this, player -> {
-            Log.d("listSize", "onResume: " + player.size());
-            Log.d("TeamID", "TeamID = " + teamID);
             adapter.setPlayers(player);
-            adapter.notifyDataSetChanged(); // Notify adapter about the data change
         });
 
 

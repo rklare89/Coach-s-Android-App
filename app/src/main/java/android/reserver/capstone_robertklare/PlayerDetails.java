@@ -79,6 +79,7 @@ public class PlayerDetails extends AppCompatActivity {
                 editIntent.putExtra("parid", parID);
                 editIntent.putExtra("playerid", personID);
                 editIntent.putExtra("isRostered", isRostered);
+                finish();
                 startActivity(editIntent);
             }
         });
