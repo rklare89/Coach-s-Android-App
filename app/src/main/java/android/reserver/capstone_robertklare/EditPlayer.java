@@ -151,14 +151,20 @@ public class EditPlayer extends AppCompatActivity {
 
             player = new Player(newPlayerID, newPlayerFName, newPlayerLName, teamID, newPosition, NewNum, selectedDate, parID, rostered);
 
-            if(isValidEmail(newEmail)) {
+            if(isValidEmail(newEmail) && (isValidPhone(newParPhone))) {
 
                 repo.updateParent(parent);
                 repo.updatePlayer(player);
                 finish();
             }
-            else {
+            else if(!isValidEmail(newEmail) && (isValidPhone(newParPhone))) {
                 Toast.makeText(EditPlayer.this, "Check Your Email Address. example@gmail.com", Toast.LENGTH_SHORT).show();
+            }
+            else if (isValidEmail(newEmail) && !(isValidPhone(newParPhone))){
+                Toast.makeText(EditPlayer.this, "Check Your Phone Number.  (xxx) xxx-xxxx", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(EditPlayer.this, "Enter Valid Phone and E-mail", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -182,6 +188,16 @@ public class EditPlayer extends AppCompatActivity {
         }
         Pattern p = Pattern.compile(EMAIL_REGULAR_EXPRESSION);
         Matcher m = p.matcher(email);
+        return m.matches();
+    }
+    public boolean isValidPhone (String phone) {
+        final String PHONE_REGULAR_EXPRESSION = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
+
+        if (phone == null) {
+            return false;
+        }
+        Pattern p = Pattern.compile(PHONE_REGULAR_EXPRESSION);
+        Matcher m = p.matcher("(202) 555-0125");
         return m.matches();
     }
 
