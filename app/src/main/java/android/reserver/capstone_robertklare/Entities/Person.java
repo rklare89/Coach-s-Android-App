@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName = "People")
 public class Person {
 
@@ -11,12 +13,16 @@ public class Person {
     long personID;
     String firstName;
     String lastname;
+    public Date lastUpdated;
+
     int teamID;
 
     public Person(String firstName, String lastname, int teamID) {
         this.firstName = firstName;
         this.lastname = lastname;
         this.teamID = teamID;
+        lastUpdated = new Date();
+
     }
 
     @Ignore
@@ -25,6 +31,7 @@ public class Person {
         this.firstName = firstName;
         this.lastname = lastname;
         this.teamID = teamID;
+        lastUpdated = new Date();
     }
 
     public long getPersonID() {
@@ -45,6 +52,10 @@ public class Person {
 
     public String getLastname() {
         return lastname;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
     }
 
     public void setLastname(String lastname) {

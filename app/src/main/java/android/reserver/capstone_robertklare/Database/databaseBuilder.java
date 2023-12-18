@@ -5,6 +5,7 @@ import android.provider.Contacts;
 import android.reserver.capstone_robertklare.DAO.ParentDAO;
 import android.reserver.capstone_robertklare.DAO.PlayerDAO;
 import android.reserver.capstone_robertklare.DAO.TeamDAO;
+import android.reserver.capstone_robertklare.DataValidation.DateCoverter;
 import android.reserver.capstone_robertklare.Entities.Parent;
 import android.reserver.capstone_robertklare.Entities.Person;
 import android.reserver.capstone_robertklare.Entities.Player;
@@ -14,11 +15,13 @@ import android.reserver.capstone_robertklare.Entities.Team;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Team.class, Player.class, Parent.class}, version = 1, exportSchema = false)
+@Database(entities = {Team.class, Player.class, Parent.class}, version = 2, exportSchema = false)
+@TypeConverters(DateCoverter.class)
 public abstract class databaseBuilder extends RoomDatabase {
 
     public abstract ParentDAO parentDAO();
@@ -43,7 +46,7 @@ public abstract class databaseBuilder extends RoomDatabase {
     }
 
     public static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(4); // You can adjust the pool size based on your needs
+            Executors.newFixedThreadPool(4);
 }
 
 

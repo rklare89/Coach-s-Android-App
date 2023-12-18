@@ -37,7 +37,7 @@ public class AddTeam extends AppCompatActivity {
         Button saveBtn = findViewById(R.id.addTeamSaveBtn);
         saveBtn.setOnClickListener(v -> {
 
-            Team newTeam = new Team();
+            Team newTeam = new Team("default", "default");
 
             EditText teamName = findViewById(R.id.insertTeamName);
             String teamString = sanitize(teamName.getText().toString().trim());

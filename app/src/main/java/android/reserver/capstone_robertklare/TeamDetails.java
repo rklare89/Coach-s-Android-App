@@ -2,19 +2,38 @@ package android.reserver.capstone_robertklare;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Entities.Player;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.OnItemClickListener{
 
@@ -80,6 +99,18 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
             startActivity(addIntent);
         });
 
+        Button exportBtn = findViewById(R.id.exportRoster);
+        exportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                repo.getPlayersByTeamID(teamID).observe(TeamDetails.this, player -> {
+                    adapter.setPlayers(player);
+
+                    generatePDF(teamName, (ArrayList<Player>) player);
+                });
+            }
+        });
+
     }
 
     @Override
@@ -130,6 +161,70 @@ public class TeamDetails extends AppCompatActivity implements PlayerListAdapter.
         repo.getPlayersByTeamID(teamID).observe(this, player -> adapter.setPlayers(player));
 
 
+    }
+
+
+    private void generatePDF(String teamName, ArrayList<Player> players) {
+        Document document = new Document();
+
+
+
+        try {
+            String fileName = "TeamDetails.pdf";
+            File pdfFile = new File(getExternalFilesDir(null), fileName);
+            String authority = getPackageName() + ".fileprovider";
+            Uri contentUri = FileProvider.getUriForFile(this, authority, pdfFile);
+
+            PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
+
+
+            document.open();
+
+            // Add team name at the top
+            Font teamNameFont = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD, BaseColor.BLACK);
+            Paragraph teamNameParagraph = new Paragraph(teamName, teamNameFont);
+            teamNameParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(teamNameParagraph);
+
+            document.add(new Paragraph("\n")); // Add some space
+
+            // Table for player details
+            PdfPTable table = new PdfPTable(5); // 5 columns for player details
+            table.setWidthPercentage(100);
+
+            // Add table headers
+            table.addCell("Player Name");
+            table.addCell("Position");
+            table.addCell("DOB");
+            table.addCell("Number");
+            table.addCell("Last Updated");
+
+
+
+            // Add player details
+            for (Player player : players) {
+                table.addCell(player.getFirstName() + " " + player.getLastname());
+                table.addCell(player.getPosition());
+                table.addCell(player.getDob());
+                table.addCell(String.valueOf(player.getNumber()));
+                Date date = (player.getLastUpdated());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dateS = dateFormat.format(date);
+                table.addCell(dateS);
+            }
+
+            document.add(table);
+
+            document.close();
+
+            //Open the report
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, "application/pdf");
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

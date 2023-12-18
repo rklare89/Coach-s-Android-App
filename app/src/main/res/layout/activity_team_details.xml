@@ -23,12 +23,11 @@
         android:id="@+id/deleteTeamButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="40dp"
         android:backgroundTint="@color/deleteRed"
         android:text="@string/delete_team"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addPlayerButton"
+        app:layout_constraintEnd_toStartOf="@+id/exportRoster"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -45,8 +44,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playerList"
-        android:layout_width="314dp"
-        android:layout_height="362dp"
+        android:layout_width="325dp"
+        android:layout_height="245dp"
         android:layout_marginTop="60dp"
         app:layout_constraintBottom_toTopOf="@+id/deleteTeamButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,26 +56,36 @@
 
     <Button
         android:id="@+id/addPlayerButton"
-        android:layout_width="wrap_content"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/addGreen"
         android:text="@string/add_player"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/deleteTeamButton" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doneBtnTD" />
 
     <Button
         android:id="@+id/doneBtnTD"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="@color/black"
         android:text="@string/done"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPlayerButton" />
+        app:layout_constraintTop_toBottomOf="@+id/playerList" />
+
+    <Button
+        android:id="@+id/exportRoster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Export Roster"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/deleteTeamButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
