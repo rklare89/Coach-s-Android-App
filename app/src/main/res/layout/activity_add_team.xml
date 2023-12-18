@@ -21,29 +21,18 @@
 
     <Button
         android:id="@+id/addTeamBackBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="@string/back_to_home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addTeamSearch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/addTeamSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="@string/search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/addTeamBackBtn" />
-
-    <Button
         android:id="@+id/addTeamSaveBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="51dp"
         android:text="@string/save_team_info"
@@ -60,8 +49,8 @@
         android:layout_marginTop="50dp"
         android:autofillHints="Team Name without Age Group"
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/enter_your_new_team_name"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView6"
