@@ -9,8 +9,16 @@ import android.os.Bundle;
 import android.reserver.capstone_robertklare.Database.Repository;
 import android.reserver.capstone_robertklare.Database.parentViewModel;
 import android.reserver.capstone_robertklare.Entities.Parent;
+import android.reserver.capstone_robertklare.Entities.Player;
+import android.reserver.capstone_robertklare.Enum.Role;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.Objects;
 
 public class EditPlayer extends AppCompatActivity {
 
@@ -27,8 +35,11 @@ public class EditPlayer extends AppCompatActivity {
 
     Repository repo;
     Parent parent;
+    Player player;
 
     private parentViewModel parentvm;
+
+    private String selectedDate;
 
 
     @Override
@@ -93,5 +104,78 @@ public class EditPlayer extends AppCompatActivity {
         });
 
 
+        Spinner rosterSpinner = findViewById(R.id.editrosterSpinner);
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this, R.array.yesNo, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        rosterSpinner.setAdapter(adapter);
+
+        boolean isOnRoster = getIntent.getBooleanExtra("isRostered", false);
+
+        if (isOnRoster){
+        rosterSpinner.setSelection(0);
+        }
+        else {
+            rosterSpinner.setSelection(1);
+        }
+
+        Button cancelBtn = findViewById(R.id.cancelEditPlayer);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        int teamID = getIntent.getIntExtra("teamid", 0);
+
+        Button saveBtn = findViewById(R.id.savePlayer);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String newParFName = parFirst.getText().toString().trim();
+                String newParLName = parLast.getText().toString().trim();
+                String newParPhone = phone.getText().toString().trim();
+                String newEmail = email.getText().toString().trim();
+
+                parent = new Parent(parID, newParFName, newParLName, teamID, newParPhone, newEmail, Role.PARENT);
+
+
+                long newPlayerID = getIntent.getLongExtra("playerid", 0);
+                String newPlayerFName = firstName.getText().toString().trim();
+                String newPlayerLName = lastName.getText().toString().trim();
+                String newPosition = pos.getText().toString().trim();
+                String newNum = num.getText().toString().trim();
+                int NewNum = Integer.valueOf(newNum);
+                boolean rostered = rosterSpinner.getSelectedItem().toString().equals("Yes");
+
+
+                date.init(date.getYear(), date.getMonth(), date.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
+                    @Override
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // Convert the selected date to a string
+                        selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + year;
+                    }
+                });
+
+                if (selectedDate == null){
+                    selectedDate = dob;
+                }
+
+                //Player(long personID, String firstName, String lastname, int teamID, String position, int number,
+                //                  String dob, long parentID, boolean isRostered)
+
+                player = new Player(newPlayerID, newPlayerFName, newPlayerLName, teamID, newPosition, NewNum, selectedDate, parID, rostered);
+
+                repo.updateParent(parent);
+                repo.updatePlayer(player);
+                finish();
+
+
+            }
+        });
+
     }
+
+
 }

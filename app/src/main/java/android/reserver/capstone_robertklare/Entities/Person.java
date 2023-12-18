@@ -1,6 +1,7 @@
 package android.reserver.capstone_robertklare.Entities;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "People")
@@ -13,6 +14,14 @@ public class Person {
     int teamID;
 
     public Person(String firstName, String lastname, int teamID) {
+        this.firstName = firstName;
+        this.lastname = lastname;
+        this.teamID = teamID;
+    }
+
+    @Ignore
+    public Person(long personID, String firstName, String lastname, int teamID) {
+        this.personID = personID;
         this.firstName = firstName;
         this.lastname = lastname;
         this.teamID = teamID;

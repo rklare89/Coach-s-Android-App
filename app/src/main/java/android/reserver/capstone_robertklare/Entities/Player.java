@@ -2,6 +2,7 @@ package android.reserver.capstone_robertklare.Entities;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 
 import java.util.Date;
 
@@ -19,6 +20,18 @@ public class Player extends Person {
     public Player(String firstName, String lastname, int teamID, String position, int number,
                   String dob, long parentID, boolean isRostered) {
         super(firstName, lastname, teamID);
+
+        this.position = position;
+        this.number = number;
+        this.dob = dob;
+        this.parentID = parentID;
+        this.isRostered = isRostered;
+    }
+
+    @Ignore
+    public Player(long personID, String firstName, String lastname, int teamID, String position, int number,
+                  String dob, long parentID, boolean isRostered) {
+        super(personID, firstName, lastname, teamID);
 
         this.position = position;
         this.number = number;
