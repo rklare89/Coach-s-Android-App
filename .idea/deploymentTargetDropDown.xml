@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="MainActivity">
+        <State />
+      </entry>
+      <entry key="MainActivityInstrumentedTest">
+        <State />
+      </entry>
+      <entry key="addPlayer()">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -17,6 +26,15 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2023-12-18T18:26:24.657586800Z" />
         </State>
+      </entry>
+      <entry key="sanitizeTest()">
+        <State />
+      </entry>
+      <entry key="viewAddTeam()">
+        <State />
+      </entry>
+      <entry key="viewPickupList()">
+        <State />
       </entry>
     </value>
   </component>

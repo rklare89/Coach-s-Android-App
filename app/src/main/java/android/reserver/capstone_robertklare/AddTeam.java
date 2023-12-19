@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddTeam extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class AddTeam extends AppCompatActivity {
             Team newTeam = new Team("default", "default");
 
             EditText teamName = findViewById(R.id.insertTeamName);
-            String teamString = sanitize(teamName.getText().toString().trim());
+            String teamString = CleanInput.sanitize(teamName.getText().toString().trim());
             String newAge = ageSpinner.getSelectedItem().toString();
             if (!(teamString.isEmpty())) {
                 newTeam.setTeamName(teamString);
@@ -56,14 +57,5 @@ public class AddTeam extends AppCompatActivity {
 
 
     }
-    //Data Sanitation Functions
-    public String sanitize(String string) {
-        String regex = "[^a-zA-Z0-9\\s]";
-        return string.replaceAll(regex, "");
-    }
 
-    public String removeLetters(String string) {
-        String regex = "\\D";
-        return string.replaceAll(regex, "");
-    }
 }

@@ -57,10 +57,10 @@ public class AddPlayer extends AppCompatActivity {
                 //Parent Information
                 //Parent First Name
                 EditText parentFirst = findViewById(R.id.editTextParentFirst);
-                String parentFirstName = sanitize(parentFirst.getText().toString());
+                String parentFirstName = CleanInput.sanitize(parentFirst.getText().toString());
                 //Parent Last Name
                 EditText parentLast = findViewById(R.id.editTextParentLast);
-                String parentLastName = sanitize(parentLast.getText().toString());
+                String parentLastName = CleanInput.sanitize(parentLast.getText().toString());
                 //Parent E-mail address
                 EditText parentEmail = findViewById(R.id.editTextTextEmailAddress);
                 String parentEmailAdd = parentEmail.getText().toString();
@@ -72,13 +72,13 @@ public class AddPlayer extends AppCompatActivity {
 
                 //Player First Name
                 EditText playerFirst = findViewById(R.id.editTextFirstName);
-                String newPlayerFirst = sanitize(playerFirst.getText().toString());
+                String newPlayerFirst = CleanInput.sanitize(playerFirst.getText().toString());
                 //Player Last Name
                 EditText playerLast = findViewById(R.id.editTextLastName);
-                String newPlayerLast = sanitize(playerLast.getText().toString());
+                String newPlayerLast = CleanInput.sanitize(playerLast.getText().toString());
                 //Player Number
                 EditText playerNum = findViewById(R.id.editTextNumber);
-                String nu = removeLetters(sanitize(playerNum.getText().toString()));
+                String nu = CleanInput.removeLetters(CleanInput.sanitize(playerNum.getText().toString()));
                 int num = Integer.parseInt(nu);
                 //Player Position
                 EditText playerPos = findViewById(R.id.editTextPosition);
@@ -90,7 +90,7 @@ public class AddPlayer extends AppCompatActivity {
                 //Player information collected
 
 
-                if (isValidEmail(parentEmailAdd) && isValidPhone(parentPhoneNo)) {
+                if (CleanInput.isValidEmail(parentEmailAdd) && CleanInput.isValidPhone(parentPhoneNo)) {
 
                     Parent newParent = new Parent(parentFirstName, parentLastName, teamID, parentPhoneNo, parentEmailAdd, Role.PARENT);
                     long parentNo = repo.insertParent(newParent);
@@ -99,52 +99,17 @@ public class AddPlayer extends AppCompatActivity {
                     repo.insertPlayer(newPlayer);
                     finish();
                 }
-                else if(!isValidEmail(parentEmailAdd) && (isValidPhone(parentPhoneNo))) {
+                else if(!CleanInput.isValidEmail(parentEmailAdd) && (CleanInput.isValidPhone(parentPhoneNo))) {
                     Toast.makeText(AddPlayer.this, "Check Your Email Address. example@gmail.com", Toast.LENGTH_SHORT).show();
                 }
-                else if (isValidEmail(parentEmailAdd) && !(isValidPhone(parentPhoneNo))){
+                else if (CleanInput.isValidEmail(parentEmailAdd) && !(CleanInput.isValidPhone(parentPhoneNo))){
                     Toast.makeText(AddPlayer.this, "Check Your Phone Number.  (xxx) xxx-xxxx", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(AddPlayer.this, "Enter Valid Phone and E-mail", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
     }
 
-
-    //Data Sanitation Methods
-    public String sanitize(String string) {
-        String regex = "[^a-zA-Z0-9\\s]";
-        return string.replaceAll(regex, "");
-    }
-
-    public String removeLetters(String string) {
-        String regex = "\\D";
-        return string.replaceAll(regex, "");
-    }
-
-    public boolean isValidEmail (String email) {
-        final String EMAIL_REGULAR_EXPRESSION = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
-        if (email == null) {
-            return false;
-        }
-        Pattern p = Pattern.compile(EMAIL_REGULAR_EXPRESSION);
-        Matcher m = p.matcher(email);
-        return m.matches();
-    }
-
-    public boolean isValidPhone (String phone) {
-        final String PHONE_REGULAR_EXPRESSION = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
-
-        if (phone == null) {
-            return false;
-        }
-        Pattern p = Pattern.compile(PHONE_REGULAR_EXPRESSION);
-        Matcher m = p.matcher("(202) 555-0125");
-        return m.matches();
-    }
 }
