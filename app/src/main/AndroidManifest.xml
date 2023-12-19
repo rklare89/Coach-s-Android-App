@@ -23,42 +23,42 @@
                 android:resource="@xml/file_paths"/>
         </provider>
         <activity
-            android:name=".SearchPlayer"
+            android:name="project.reserver.capstone_robertklare.SearchPlayer"
             android:exported="false" />
         <activity
-            android:name=".EditPlayer"
+            android:name="project.reserver.capstone_robertklare.EditPlayer"
             android:exported="false"
-            android:parentActivityName=".TeamDetails" />
+            android:parentActivityName="project.reserver.capstone_robertklare.TeamDetails" />
         <activity
-            android:name=".PickupList"
+            android:name="project.reserver.capstone_robertklare.PickupList"
             android:exported="false" />
         <activity
-            android:name=".ParentDetails"
+            android:name="project.reserver.capstone_robertklare.ParentDetails"
             android:exported="false"
             android:label="Parent Details"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="project.reserver.capstone_robertklare.MainActivity" />
         <activity
-            android:name=".PlayerDetails"
+            android:name="project.reserver.capstone_robertklare.PlayerDetails"
             android:exported="false"
             android:label="Player Details"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="project.reserver.capstone_robertklare.MainActivity" />
         <activity
-            android:name=".AddPlayer"
+            android:name="project.reserver.capstone_robertklare.AddPlayer"
             android:exported="false"
             android:label="Add Player"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="project.reserver.capstone_robertklare.MainActivity" />
         <activity
-            android:name=".TeamDetails"
+            android:name="project.reserver.capstone_robertklare.TeamDetails"
             android:exported="false"
             android:label="Team Details"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="project.reserver.capstone_robertklare.MainActivity" />
         <activity
-            android:name=".AddTeam"
+            android:name="project.reserver.capstone_robertklare.AddTeam"
             android:exported="false"
             android:label="Add Team"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="project.reserver.capstone_robertklare.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="project.reserver.capstone_robertklare.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

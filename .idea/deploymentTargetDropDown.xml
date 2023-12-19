@@ -5,6 +5,9 @@
       <entry key="MainActivity">
         <State />
       </entry>
+      <entry key="MainActivity (1)">
+        <State />
+      </entry>
       <entry key="MainActivityInstrumentedTest">
         <State />
       </entry>
@@ -28,9 +31,6 @@
         <State />
       </entry>
       <entry key="sanitizeTest()">
-        <State />
-      </entry>
-      <entry key="viewPickupList()">
         <State />
       </entry>
     </value>

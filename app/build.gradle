@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'android.reserver.capstone_robertklare'
+    namespace 'project.reserver.capstone_robertklare'
     compileSdk 34
 
     defaultConfig {
-        applicationId "android.reserver.capstone_robertklare"
+        applicationId "project.reserver.capstone_robertklare"
         minSdk 27
         targetSdk 34
         versionCode 1
