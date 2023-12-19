@@ -2,7 +2,6 @@ package android.reserver.capstone_robertklare;
 
 
 import static androidx.test.espresso.Espresso.onView;
-
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -10,16 +9,11 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-
-import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.Espresso;
-
-
-import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -44,6 +38,8 @@ public class MainActivityInstrumentedTest {
         onView(withId(R.id.textView5)).check(matches(withText("Add Your New Team:")));
     }
 
+
+
     @Test
     public void viewPickupList() {
         onView(withId(R.id.pickupBtn))
@@ -66,12 +62,9 @@ public class MainActivityInstrumentedTest {
                 .perform(click());
 
         onView(withId(R.id.textView)).check(matches(withText("Coaching Companion:")));
-
     }
-
     @Test
     public void addThenSearch() {
-
         onView(withId(R.id.addTeamBtn))
                 .perform(click());
 
@@ -130,4 +123,5 @@ public class MainActivityInstrumentedTest {
         };
 
     }
+
 }
