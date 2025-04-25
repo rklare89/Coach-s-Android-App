@@ -1,10 +1,55 @@
-<h1><strong>Coaching Companion</strong></h1>
 
-<p>This application is a personal project for youth baseball/softball coaches.</p>
+# Coach's Android App
 
-<p>As a youth sports coach, keeping up with emergency contact information for parents can be tedious, especially when kids are raised by people other than their parents.  This application is initially developed to keep player contact information quick to access.  
-future updates will aim to add general team management functionality.  </p>
+## Overview
+Coach's Android App is a mobile application designed to assist coaches in managing their teams, schedules, and player information. Built using Android Studio, this app provides a user-friendly interface for organizing coaching tasks and tracking team performance.
 
-<p>This project is currently in testing status on the Google Play Store.</p>
+## Features
+- **Team Management**: Create and manage team rosters, including player profiles and contact information.
+- **Player Search**: Search for players quickly and locate parent's contact information. 
+- **Roster Export**: Export a team's roster to a printable PDF file.
 
-<p>To collaborate on this project or volunteer to help with closed testing, E-mail me at allenklare33@gmail.com.</p>
+## Technologies Used
+- **Language**: Java, SQLite
+- **Framework**: Android SDK
+- **Database**: Database is local to device using the Room Framework for security of information.
+- **Tools**: Android Studio, Git, Espresso
+- **Libraries**: Room
+
+## Installation
+To run the project locally, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/rklare89/Coach-s-Android-App.git
+   cd Coach-s-Android-App
+   ```
+
+2. **Open in Android Studio**:
+   - Launch Android Studio.
+   - Select `Open an existing project` and navigate to the cloned repository folder.
+   - Let Android Studio sync the project with Gradle.
+
+3. **Build and Run**:
+   - Connect an Android device or start an emulator.
+   - Click `Run` in Android Studio to build and deploy the app.
+
+## Usage
+1. **Initial Setup**:
+   - Add your team(s) and input player details.
+2. **Managing Teams**:
+   - Use the dashboard to view teams or pickup players.
+   - Edit or update information as needed.
+
+## Contributing
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit (`git commit -m "Add feature"`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a Pull Request.
+
+## Contact
+For questions or feedback, reach out to Allen Klare at allenklare33@gmail.com or open an issue on GitHub.
+
+
